@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/style.css">
+  <title>PPOB | Register</title>
+</head>
+<body>
+  
+  <main class="flex justify-center items-center h-screen background-gradient">
+    <div class="flex flex-col bg-white rounded-md p-10">
+      <p class="text-center text-3xl font-bold mb-5">Register</p>
+      <div class="my-10">
+        <div class="flex items-center">
+          <div class="mr-16">
+            <p class="text-sm">Username</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/user.svg" alt="username">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="username">
+            </div>
+          </div>
+          <div>
+            <p class="text-sm">Nama Pengguna</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/user.svg" alt="nama pengguna">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="nama pengguna">
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center my-8">
+          <div class="mr-16">
+            <p class="text-sm">Alamat</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/user.svg" alt="alamat">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="alamat">
+            </div>
+          </div>
+          <div>
+            <p class="text-sm">Nomor KWH</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/user.svg" alt="nomor kwh">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="nomor kwh">
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="mr-16">
+            <p class="text-sm mt-3">Password</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="password">
+            </div>
+          </div>
+          <div>
+            <p class="text-sm mt-3">konfirmasi password</p>
+            <div class="flex items-center">
+              <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
+              <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="konfirmasi password">
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="./login.php">
+        <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>
+
+<?php
+
+require "../../config/conn.php";
+
+
+?>
