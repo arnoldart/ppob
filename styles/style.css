@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  outline: none;
+}
+
+.background-gradient { 
+  background: rgb(196,71,170);
+  background: linear-gradient(61deg, rgba(196,71,170,1) 0%, rgba(107,53,150,1) 50%, rgba(0,212,255,1) 100%);
+}
