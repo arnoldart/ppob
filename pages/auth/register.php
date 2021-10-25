@@ -1,3 +1,11 @@
+<?php
+
+require '../../config/conn.php';
+
+$queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
+
+?>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +19,7 @@
   
   <main class="flex justify-center items-center h-screen background-gradient">
     <div class="flex flex-col bg-white rounded-md p-10">
-      <form action="" method="GET">
+      <form action="../../utils/prosesRegister.php" method="GET">
         <p class="text-center text-3xl font-bold mb-5">Register</p>
         <div class="my-10">
           <div class="flex items-center">
@@ -46,19 +54,33 @@
               </div>
             </div>
           </div>
-          <div class="flex items-center">
-            <div class="mr-16">
-              <p class="text-sm mt-3">Password</p>
-              <div class="flex items-center">
-                <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
-                <input class="mt-1.5 border-b border-gray-300" type="text" name="password" placeholder="password">
+          <div class="flex">
+            <div>
+              <div class="mr-16">
+                <p class="text-sm mt-3">Password</p>
+                <div class="flex items-center">
+                  <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
+                  <input class="mt-1.5 border-b border-gray-300" type="text" name="password" placeholder="password">
+                </div>
+              </div>
+              <div>
+                <p class="text-sm mt-3">konfirmasi password</p>
+                <div class="flex items-center">
+                  <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
+                  <input class="mt-1.5 border-b border-gray-300" type="text" name="konfirmasiPassword" placeholder="konfirmasi password">
+                </div>
               </div>
             </div>
             <div>
-              <p class="text-sm mt-3">konfirmasi password</p>
+              <p class="text-sm">Daya</p>
               <div class="flex items-center">
-                <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
-                <input class="mt-1.5 border-b border-gray-300" type="text" name="konfirmasiPassword" placeholder="konfirmasi password">
+                <img class="w-5 mr-2" src="../../icon/user.svg" alt="nomor kwh">
+                <select name="tarif">
+                  <option value="">--Pilih Daya--</option>
+                  <?php while ( $rowDaya = mysqli_fetch_assoc($queryDaya) ) {?>
+                    <option value="<?= $rowDaya['id_tarif']?>"><?= $rowDaya['daya'];?> </option>
+                  <?php }?>
+                </select>
               </div>
             </div>
           </div>
@@ -74,32 +96,3 @@
 </body>
 </html>
 
-<?php
-
-require "../../config/conn.php";
-
-$username = @$_GET['username'];
-$password = @$_GET['password'];
-$konfimasiPassword = @$_GET['konfirmasiPassword'];
-$nomorKwh = @$_GET['nomorKwh'];
-$namaPengguna = @$_GET['namaPengguna'];
-$alamat = @$_GET['alamat'];
-$idTarif = 1;
-
-echo $username, $password, $konfimasiPassword, $nomorKwh, $namaPengguna, $alamat, $idTarif;
-
-// $tests = mysqli_query($conn, 'INSERT INTO tarif(daya, tarifperkwh) values ()');
-$test = "INSERT INTO pelanggan(username, password, nomor_kwh, nama_pelanggan, alamat, id_tarif) values ('".$username."', '".$password."', '".$konfimasiPassword."', '".$nomorKwh."', '".$namaPengguna."', '".$alamat."', '".$idTarif."')";
-
-var_dump($test);
-
-// $query = mysqli_query($conn, $test);
-
-// if($query) {
-//   echo 'berhasil';
-//   return ;
-// } else {
-//   echo 'gagal';
-// }
-
-?>
