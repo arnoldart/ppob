@@ -4,6 +4,26 @@ require '../../config/conn.php';
 
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
+$username = @$_GET['username'];
+$password = @$_GET['password'];
+$konfimasiPassword = @$_GET['konfirmasiPassword'];
+$nomorKwh = @$_GET['nomorKwh'];
+$namaPengguna = @$_GET['namaPengguna'];
+$alamat = @$_GET['alamat'];
+$idTarif = @$_GET['tarif'];
+
+// if(isset($_GET['submit'])) {
+
+// }
+
+// if ($username === "") {
+//   echo "username tidak diisi";
+//   return;
+// }else if($password === "") {
+//   echo "password tidak diisi";
+//   return;
+// }
+
 ?>
 
 <html lang="en">
@@ -19,7 +39,7 @@ $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
   
   <main class="flex justify-center items-center h-screen background-gradient">
     <div class="flex flex-col bg-white rounded-md p-10">
-      <form action="../../utils/prosesRegister.php" method="GET">
+      <form action="" method="GET" name="testing">
         <p class="text-center text-3xl font-bold mb-5">Register</p>
         <div class="my-10">
           <div class="flex items-center">
@@ -27,7 +47,7 @@ $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
               <p class="text-sm">Username</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="username">
-                <input class="mt-1.5 border-b border-gray-300" type="text" name="username" placeholder="username">
+                <input class="mt-1.5 border-b border-gray-300" type="text" name="username" id="username" placeholder="username">
               </div>
             </div>
             <div>
@@ -85,13 +105,15 @@ $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
             </div>
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient">submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit">submit</button>
         <a href="./login.php">
           <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
         </a>
       </form>
     </div>
   </main>
+
+  <script src="../../dom/form.dom.js"></script>
 
 </body>
 </html>
