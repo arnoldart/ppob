@@ -15,14 +15,6 @@ if(isset($_POST['submit'])) {
 
 }
 
-// if ($username === "") {
-//   echo "username tidak diisi";
-//   return;
-// }else if($password === "") {
-//   echo "password tidak diisi";
-//   return;
-// }
-
 ?>
 
 <html lang="en">
@@ -44,6 +36,7 @@ if(isset($_POST['submit'])) {
           <div class="flex items-center">
             <div class="mr-16">
               <p class="text-sm">Username</p>
+              <p class="hidden text-sm text-red-500" id="username-msg">Username belum diisi</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="username">
                 <input class="mt-1.5 border-b border-gray-300" type="text" name="username" id="username" placeholder="username">
@@ -114,7 +107,6 @@ if(isset($_POST['submit'])) {
 
   <script src="../../dom/form.dom.js"></script>
   <script src="../../utils/formHandler.js"></script>
-  <!-- <script src="../../utils/useState.js"></script> -->
 
 </body>
 </html>

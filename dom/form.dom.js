@@ -7,6 +7,7 @@ const nomorKwh = document.getElementById('nomorKwh')
 const password = document.getElementById('password')
 const konfirmasiPassword = document.getElementById('konfirmasiPassword')
 
+const usernameMsg = document.getElementById('username-msg')
 
 submit.addEventListener("click", () => {
   const getUserInput = {

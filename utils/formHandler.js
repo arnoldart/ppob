@@ -1,5 +1,9 @@
 const errorHandling = (value) => {
-  console.log(value)
+  if(value.username === "") {
+    usernameMsg.style.display = "block"
+
+    return
+  }
 
   return
 }
