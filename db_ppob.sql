@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2021 at 03:27 AM
+-- Generation Time: Nov 01, 2021 at 01:48 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -36,16 +36,12 @@ CREATE TABLE `admin` (
   `id_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `level`
+-- Dumping data for table `admin`
 --
 
-CREATE TABLE `level` (
-  `id_level` int(11) NOT NULL,
-  `nama_level` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_admin`, `id_level`) VALUES
+(1, 'hadeh', '123', 'testing admin', 1);
 
 -- --------------------------------------------------------
 
@@ -62,6 +58,13 @@ CREATE TABLE `pelanggan` (
   `alamat` varchar(255) NOT NULL,
   `id_tarif` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pelanggan`
+--
+
+INSERT INTO `pelanggan` (`id_pelanggan`, `username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES
+(1, 'jedidta', '1234', 12312, 'jedidta adoni saputra', 'mars', 1);
 
 -- --------------------------------------------------------
 
@@ -124,6 +127,33 @@ CREATE TABLE `tarif` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `tarif`
+--
+
+INSERT INTO `tarif` (`id_tarif`, `daya`, `tarifperkwh`) VALUES
+(1, 10000, 10000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userlevel`
+--
+
+CREATE TABLE `userlevel` (
+  `id_level` int(11) NOT NULL,
+  `nama_level` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userlevel`
+--
+
+INSERT INTO `userlevel` (`id_level`, `nama_level`) VALUES
+(1, 'admin'),
+(2, 'user'),
+(3, 'bank');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -133,12 +163,6 @@ CREATE TABLE `tarif` (
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`),
   ADD KEY `id_level` (`id_level`);
-
---
--- Indexes for table `level`
---
-ALTER TABLE `level`
-  ADD PRIMARY KEY (`id_level`);
 
 --
 -- Indexes for table `pelanggan`
@@ -178,6 +202,12 @@ ALTER TABLE `tarif`
   ADD PRIMARY KEY (`id_tarif`);
 
 --
+-- Indexes for table `userlevel`
+--
+ALTER TABLE `userlevel`
+  ADD PRIMARY KEY (`id_level`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -185,19 +215,13 @@ ALTER TABLE `tarif`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `level`
---
-ALTER TABLE `level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -221,7 +245,13 @@ ALTER TABLE `tagihan`
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `userlevel`
+--
+ALTER TABLE `userlevel`
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -231,7 +261,7 @@ ALTER TABLE `tarif`
 -- Constraints for table `admin`
 --
 ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`);
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `userlevel` (`id_level`);
 
 --
 -- Constraints for table `pelanggan`
