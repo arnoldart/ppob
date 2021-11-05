@@ -1,0 +1,6 @@
+<?php
+
+function formHandler($value) {
+}
+
+?>

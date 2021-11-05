@@ -1,8 +1,11 @@
 <?php
 
 require '../../config/conn.php';
+require '../../utils/testing.php';
 
-if(isset($_POST['submit'])) {
+$queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
+
+if(!isset($_POST['submit'])) {
   $username = @$_POST['username'];
   $password = @$_POST['password'];
   $konfimasiPassword = @$_POST['konfirmasiPassword'];
@@ -11,8 +14,22 @@ if(isset($_POST['submit'])) {
   $alamat = @$_POST['alamat'];
   $idTarif = @$_POST['tarif'];
 
-  $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
+  if($username === "" && $password === "" || $konfimasiPassword === "" || $nomorKwh === "" || $namaPengguna === "" || $alamat === "") {
+    echo "asdsd";
+    return;
+  }
+
+  if($password !== $konfimasiPassword) {
+    echo "asdsd";
+    return;
+  }
+  
+  $queryUser = "INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES ('$username','$password','$nomorKwh','$namaPengguna','$alamat','$idTarif')";
+  
+  mysqli_query($conn, $queryUser);
+
+  setcookie($username);
 }
 
 ?>
@@ -44,6 +61,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div>
               <p class="text-sm">Nama Pengguna</p>
+              <p class="hidden text-sm text-red-500" id="namaPengguna-msg">Nama Pengguna belum diisi</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="nama pengguna">
                 <input class="mt-1.5 border-b border-gray-300" type="text" name="namaPengguna" id="namaPengguna" placeholder="nama pengguna">
@@ -53,6 +71,7 @@ if(isset($_POST['submit'])) {
           <div class="flex items-center my-8">
             <div class="mr-16">
               <p class="text-sm">Alamat</p>
+              <p class="hidden text-sm text-red-500" id="alamat-msg">Nama Pengguna belum diisi</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="alamat">
                 <input class="mt-1.5 border-b border-gray-300" type="text" name="alamat" id="alamat" placeholder="alamat">
@@ -60,6 +79,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div>
               <p class="text-sm">Nomor KWH</p>
+              <p class="hidden text-sm text-red-500" id="nomorKwh-msg">Nama Pengguna belum diisi</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="nomor kwh">
                 <input class="mt-1.5 border-b border-gray-300" type="text" name="nomorKwh" id="nomorKwh" placeholder="nomor kwh">
@@ -70,6 +90,7 @@ if(isset($_POST['submit'])) {
             <div>
               <div class="mr-16">
                 <p class="text-sm mt-3">Password</p>
+                <p class="hidden text-sm text-red-500" id="password-msg">Nama Pengguna belum diisi</p>
                 <div class="flex items-center">
                   <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
                   <input class="mt-1.5 border-b border-gray-300" type="text" name="password" id="password" placeholder="password">
@@ -77,6 +98,7 @@ if(isset($_POST['submit'])) {
               </div>
               <div>
                 <p class="text-sm mt-3">konfirmasi password</p>
+                <p class="hidden text-sm text-red-500" id="konfirmasiPassword-msg">Nama Pengguna belum diisi</p>
                 <div class="flex items-center">
                   <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
                   <input class="mt-1.5 border-b border-gray-300" type="text" name="konfirmasiPassword" id="konfirmasiPassword" placeholder="konfirmasi password">
@@ -85,9 +107,10 @@ if(isset($_POST['submit'])) {
             </div>
             <div>
               <p class="text-sm">Daya</p>
+              <p class="hidden text-sm text-red-500" id="tarif-msg">Nama Pengguna belum diisi</p>
               <div class="flex items-center">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="nomor kwh">
-                <select name="tarif">
+                <select name="tarif" id="tarif">
                   <option value="">--Pilih Daya--</option>
                   <?php while ( $rowDaya = mysqli_fetch_assoc($queryDaya) ) {?>
                     <option value="<?= $rowDaya['id_tarif']?>"><?= $rowDaya['daya'];?> </option>
@@ -97,7 +120,7 @@ if(isset($_POST['submit'])) {
             </div>
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="button" id="submit">submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" id="submit">submit</button>
         <a href="./login.php">
           <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
         </a>

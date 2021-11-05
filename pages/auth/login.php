@@ -1,3 +1,28 @@
+<?php
+
+require '../../config/conn.php';
+
+if(isset($_POST['submit'])) {
+  $username = @$_POST['username'];
+  $password = @$_POST['password'];
+
+  $queryUser = "SELECT * FROM pelanggan WHERE username=$username AND password=$password";
+
+  $data = mysqli_query($conn, $queryUser);
+
+  $cek = mysqli_num_rows($data);
+ 
+  if($cek > 0){
+    $_SESSION['username'] = $username;
+    $_SESSION['status'] = "login";
+    header("location:../index.php");
+  }
+
+}
+
+
+?>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +36,7 @@
   
   <main class="flex justify-center items-center h-screen background-gradient">
     <div class="flex flex-col bg-white rounded-md p-10">
-      <form method="GET">
+      <form method="POST">
         <p class="text-center text-3xl font-bold mb-5">Login</p>
         <div class="my-10">
           <p class="text-sm">Username</p>
@@ -25,7 +50,7 @@
             <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="password">
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient">submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient" id="submit" >submit</button>
         <a href="./register.php">
           <p class="text-center text-sm text-blue-400 mt-10">saya belum punya akun!</p>
         </a>
@@ -37,26 +62,26 @@
 </body>
 </html>
 
-<?php
+<!-- <?php 
 
-require "../../config/conn.php";
+// require "../../config/conn.php";
 
-$username = @$_GET['username'];
-$password = @$_GET['password'];
+// $username = @$_GET['username'];
+// $password = @$_GET['password'];
 
-$adminQuery = mysqli_query($conn, 'SELECT
-                                id_admin,
-                                  username,
-                                  password,
-                                  nama_admin,
-                                  nama_level
+// $adminQuery = mysqli_query($conn, 'SELECT
+//                                 id_admin,
+//                                   username,
+//                                   password,
+//                                   nama_admin,
+//                                   nama_level
 
-                                FROM `admin`
+//                                 FROM `admin`
 
-                                INNER JOIN userlevel
-                                ON admin.id_level=userlevel.id_level'
-                        );
+//                                 INNER JOIN userlevel
+//                                 ON admin.id_level=userlevel.id_level'
+//                         );
 
-$userQuery = mysqli_query($conn, 'SELECT * FROM pelanggan');
+// $userQuery = mysqli_query($conn, 'SELECT * FROM pelanggan');
 
-?>
+// ?>
