@@ -2,21 +2,32 @@
 
 require '../../config/conn.php';
 
+// if(isset($_COOKIE['login'])) {
+//   if($_COOKIE['login'] == 'true') {
+//     header("Location: ../user.php?username={$_COOKIE['username']}");
+//   }
+// }
+
 if(isset($_POST['submit'])) {
   $username = @$_POST['username'];
   $password = @$_POST['password'];
 
-  $queryUser = "SELECT * FROM pelanggan WHERE username=$username AND password=$password";
+  $queryUser = "SELECT * FROM pelanggan WHERE username='$username' AND password=$password";
 
   $data = mysqli_query($conn, $queryUser);
 
-  $cek = mysqli_num_rows($data);
- 
-  if($cek > 0){
-    $_SESSION['username'] = $username;
-    $_SESSION['status'] = "login";
-    header("location:../index.php");
+  if(mysqli_num_rows($data) === 0) {
+    echo "lah";
+
+    return;
   }
+
+  setcookie(
+    'username', $username,
+    'login', 'true'
+  );
+
+  header("Location: ../user.php")
 
 }
 
@@ -47,10 +58,10 @@ if(isset($_POST['submit'])) {
           <p class="text-sm mt-3">Password</p>
           <div class="flex">
             <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
-            <input class="mt-1.5 border-b border-gray-300" type="text" placeholder="password">
+            <input class="mt-1.5 border-b border-gray-300" type="text" name="password" placeholder="password">
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient" id="submit" >submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit" >submit</button>
         <a href="./register.php">
           <p class="text-center text-sm text-blue-400 mt-10">saya belum punya akun!</p>
         </a>

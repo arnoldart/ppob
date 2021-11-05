@@ -5,15 +5,14 @@ require '../../utils/testing.php';
 
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
-if(!isset($_POST['submit'])) {
-  $username = @$_POST['username'];
-  $password = @$_POST['password'];
-  $konfimasiPassword = @$_POST['konfirmasiPassword'];
-  $nomorKwh = @$_POST['nomorKwh'];
-  $namaPengguna = @$_POST['namaPengguna'];
-  $alamat = @$_POST['alamat'];
-  $idTarif = @$_POST['tarif'];
-
+if(isset($_POST['submit'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $konfimasiPassword = $_POST['konfirmasiPassword'];
+  $nomorKwh = $_POST['nomorKwh'];
+  $namaPengguna = $_POST['namaPengguna'];
+  $alamat = $_POST['alamat'];
+  $idTarif = $_POST['tarif'];
 
   if($username === "" && $password === "" || $konfimasiPassword === "" || $nomorKwh === "" || $namaPengguna === "" || $alamat === "") {
     echo "asdsd";
@@ -27,9 +26,11 @@ if(!isset($_POST['submit'])) {
   
   $queryUser = "INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES ('$username','$password','$nomorKwh','$namaPengguna','$alamat','$idTarif')";
   
-  mysqli_query($conn, $queryUser);
+  $data = mysqli_query($conn, $queryUser);
 
-  setcookie($username);
+  header("Location: ./login.php");
+
+  exit;
 }
 
 ?>
@@ -120,7 +121,7 @@ if(!isset($_POST['submit'])) {
             </div>
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" id="submit">submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit">submit</button>
         <a href="./login.php">
           <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
         </a>
@@ -130,7 +131,7 @@ if(!isset($_POST['submit'])) {
 
   <script src="../../dom/form.dom.js"></script>
   <script src="../../utils/formHandler.js"></script>
-
+  
 </body>
 </html>
 
