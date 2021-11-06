@@ -5,6 +5,12 @@ require '../../utils/testing.php';
 
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
+if(isset($_COOKIE['login'])) {
+  if($_COOKIE['login'] == 'true') {
+    header("Location: ../index.php");
+  }
+}
+
 if(isset($_POST['submit'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
@@ -30,7 +36,7 @@ if(isset($_POST['submit'])) {
 
   header("Location: ./login.php");
 
-  exit;
+  return;
 }
 
 ?>

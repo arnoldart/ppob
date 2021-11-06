@@ -2,11 +2,11 @@
 
 require '../../config/conn.php';
 
-// if(isset($_COOKIE['login'])) {
-//   if($_COOKIE['login'] == 'true') {
-//     header("Location: ../user.php?username={$_COOKIE['username']}");
-//   }
-// }
+if(isset($_COOKIE['login'])) {
+  if($_COOKIE['login'] == 'true') {
+    header("Location: ../index.php");
+  }
+}
 
 if(isset($_POST['submit'])) {
   $username = @$_POST['username'];
@@ -22,15 +22,12 @@ if(isset($_POST['submit'])) {
     return;
   }
 
-  setcookie(
-    'username', $username,
-    'login', 'true'
-  );
+  setcookie('username', $username, time()+24*60*60, '/');
+  setcookie('login', 'true', time()+24*60*60, '/');
 
-  header("Location: ../user.php")
+  header("Location: ../index.php");
 
 }
-
 
 ?>
 

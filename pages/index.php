@@ -1,7 +1,12 @@
 <?php
 
-require '../config/conn.php'
+require '../config/conn.php';
 
+if(!isset($_COOKIE['login'])) {
+  header("Location: ./auth/login.php");
+
+  return;
+}
 
 ?>
 
@@ -14,7 +19,7 @@ require '../config/conn.php'
 </head>
 <body>
   
-  anda berhasil login
+  <p>Selamat Datang <?= $_COOKIE['username']?></p>
 
 </body>
 </html>
