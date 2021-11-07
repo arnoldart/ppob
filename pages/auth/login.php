@@ -12,20 +12,38 @@ if(isset($_POST['submit'])) {
   $username = @$_POST['username'];
   $password = @$_POST['password'];
 
-  $queryUser = "SELECT * FROM pelanggan WHERE username='$username' AND password=$password";
-
-  $data = mysqli_query($conn, $queryUser);
-
-  if(mysqli_num_rows($data) === 0) {
-    echo "lah";
+  if($username === "admin" && $password === "admin") {
+    header("Location: ../admin/");
 
     return;
   }
 
-  setcookie('username', $username, time()+24*60*60, '/');
-  setcookie('login', 'true', time()+24*60*60, '/');
+  $queryUser = "SELECT * FROM pelanggan WHERE username='$username' AND password=$password";
 
-  header("Location: ../index.php");
+  $data = mysqli_query($conn, $queryUser);
+
+  $test;
+
+  while ($row = mysqli_fetch_assoc($data)) {
+    $test = $row['username'];
+  }
+
+  if($test === "") {
+    echo "seiuhui";
+    return;
+  }
+
+
+  // if(mysqli_num_rows($data) === 0) {
+  //   echo "lah";
+
+  //   return;
+  // }
+
+  // setcookie('username', $username, time()+24*60*60, '/');
+  // setcookie('login', 'true', time()+24*60*60, '/');
+
+  // header("Location: ../index.php");
 
 }
 
