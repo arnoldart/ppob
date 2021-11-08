@@ -8,6 +8,15 @@ if(!isset($_COOKIE['login'])) {
   return;
 }
 
+if(isset($_POST['logout'])) {
+  setcookie('login', null, -1, '/');
+  echo "
+    <script>
+      window.location.reload()
+    </script>
+  ";
+}
+
 ?>
 
 <html lang="en">
@@ -19,7 +28,12 @@ if(!isset($_COOKIE['login'])) {
 </head>
 <body>
   
-  <p>Selamat Datang <?= $_COOKIE['username']?></p>
+  <div>
+    <p>Selamat Datang <?= $_COOKIE['username']?></p>
+    <form action="" method="POST">
+      <button type="submit" name="logout">Logout</button>
+    </form>
+  </div>
 
 </body>
 </html>
