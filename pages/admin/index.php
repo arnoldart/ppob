@@ -4,6 +4,22 @@ require '../../config/conn.php';
 
 $queryUser = mysqli_query($conn, "SELECT * FROM pelanggan");
 
+if(!isset($_COOKIE['login'])) {
+  header("Location: ../auth/loginAdmin.php");
+
+  return;
+}
+
+
+if(isset($_POST['logout'])) {
+  setcookie('login', null, -1, '/');
+  echo "
+    <script>
+      window.location.reload()
+    </script>
+  ";
+}
+
 ?>
 
 <html lang="en">
@@ -16,7 +32,12 @@ $queryUser = mysqli_query($conn, "SELECT * FROM pelanggan");
 </head>
 <body>
   
-  <p>Selamat Datang admin</p>
+  <div class="flex">
+    <p>Selamat Datang <?= $_COOKIE['username']?></p>
+    <form action="" method="POST">
+      <button type="submit" name="logout">Logout</button>
+    </form>
+  </div>
 
   <table>
     <thead>

@@ -4,7 +4,7 @@ require '../../config/conn.php';
 
 if(isset($_COOKIE['login'])) {
   if($_COOKIE['login'] == 'true') {
-    header("Location: ../index.php");
+    header("Location: ../admin");
   }
 }
 
@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
     return;
   }
 
-  $queryUser = "SELECT * FROM pelanggan WHERE username='$username' AND password=$password";
+  $queryUser = "SELECT * FROM admin WHERE username='$username' AND password=$password";
   $data = mysqli_query($conn, $queryUser);
 
   if(mysqli_num_rows($data) === 0) {
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])) {
   setcookie('username', $username, time()+24*60*60, '/');
   setcookie('login', 'true', time()+24*60*60, '/');
 
-  header("Location: ../index.php");
+  header("Location: ../admin/");
 
 }
 
@@ -64,7 +64,7 @@ if(isset($_POST['submit'])) {
           </div>
         </div>
         <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit" >submit</button>
-        <a href="./register.php">
+        <a href="./adminRegister.php">
           <p class="text-center text-sm text-blue-400 mt-10">saya belum punya akun!</p>
         </a>
       </form>
