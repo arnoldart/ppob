@@ -52,7 +52,7 @@ if(isset($_POST['submit'])) {
       <form action="" method="post">
         <p class="text-center text-3xl font-bold mb-5">Register</p>
         <div class="my-10">
-          <div class="flex items-center">
+          <div class="flex items-center my-8">
             <div class="mr-16">
               <p class="text-sm">Username</p>
               <p class="hidden text-sm text-red-500" id="username-msg">Username belum diisi</p>
@@ -70,7 +70,7 @@ if(isset($_POST['submit'])) {
               </div>
             </div>
           </div>
-          <div class="flex">
+          <div class="flex items-center">
             <div class="mr-16">
               <p class="text-sm mt-3">Password</p>
               <p class="hidden text-sm text-red-500" id="password-msg">Nama Pengguna belum diisi</p>
@@ -89,7 +89,7 @@ if(isset($_POST['submit'])) {
             </div>
           </div>
         </div>
-        <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit">submit</button>
+        <button class="text-white py-1 rounded-2xl w-full background-gradient mt-8" type="submit" name="submit" id="submit">submit</button>
         <a href="./loginAdmin.php">
           <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
         </a>

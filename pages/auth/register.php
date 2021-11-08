@@ -94,7 +94,7 @@ if(isset($_POST['submit'])) {
             </div>
           </div>
           <div class="flex">
-            <div>
+            <div class="-mt-3">
               <div class="mr-16">
                 <p class="text-sm mt-3">Password</p>
                 <p class="hidden text-sm text-red-500" id="password-msg">Nama Pengguna belum diisi</p>
@@ -104,7 +104,7 @@ if(isset($_POST['submit'])) {
                 </div>
               </div>
               <div>
-                <p class="text-sm mt-3">konfirmasi password</p>
+                <p class="text-sm mt-8">konfirmasi password</p>
                 <p class="hidden text-sm text-red-500" id="konfirmasiPassword-msg">Nama Pengguna belum diisi</p>
                 <div class="flex items-center">
                   <img class="w-5 mr-2" src="../../icon/lock.svg" alt="password">
@@ -115,7 +115,7 @@ if(isset($_POST['submit'])) {
             <div>
               <p class="text-sm">Daya</p>
               <p class="hidden text-sm text-red-500" id="tarif-msg">Nama Pengguna belum diisi</p>
-              <div class="flex items-center">
+              <div class="flex items-center mt-3">
                 <img class="w-5 mr-2" src="../../icon/user.svg" alt="nomor kwh">
                 <select name="tarif" id="tarif">
                   <option value="">--Pilih Daya--</option>
