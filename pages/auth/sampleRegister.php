@@ -1,7 +1,7 @@
 <?php
 
 require '../../config/conn.php';
-require '../../utils/testing.php';
+require '../../utils/registerAdmin.php';
 
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
@@ -14,13 +14,14 @@ if(isset($_COOKIE['login'])) {
 }
 
 if(isset($_POST['submit'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  $konfimasiPassword = $_POST['konfirmasiPassword'];
-  $nomorKwh = $_POST['nomorKwh'];
-  $namaPengguna = $_POST['namaPengguna'];
-  $alamat = $_POST['alamat'];
-  $idTarif = $_POST['tarif'];
+  $username = mysqli_real_escape_string($conn, $_POST['username']);
+  $password = mysqli_real_escape_string($conn, $_POST['password']);
+  $konfimasiPassword = mysqli_real_escape_string($conn, 
+  $_POST['konfirmasiPassword']);
+  $nomorKwh = mysqli_real_escape_string($conn, $_POST['nomorKwh']);
+  $namaPengguna = mysqli_real_escape_string($conn, $_POST['namaPengguna']);
+  $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
+  $idTarif = mysqli_real_escape_string($conn,  $_POST['tarif']);
 
   if($username === "" && $password === "" || $konfimasiPassword === "" || $nomorKwh === "" || $namaPengguna === "" || $alamat === "") {
     echo "asdsd";
@@ -32,21 +33,12 @@ if(isset($_POST['submit'])) {
     return;
   }
   
-  $isAdminID = "";
-  $row = mysqli_query($conn, "SELECT * FROM admin");
-
-  foreach($row as $idx => $val) {
-    $isAdminID = (int)$idx;
-  }
-
-  if($isAdminID === "") {
-    mysqli_query($conn, "INSERT INTO `admin` (`username`, `password`, `nama_admin`, `id_level`) VALUES ('$username','$password','$namaPengguna', 1)");
+  if(registerAdmin($conn, $username, $password, $namaPengguna) === "true") {
     header("Location: ./sampleLogin.php");
     return;
   }
 
-  $queryUser = "INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES ('$username','$password','$nomorKwh','$namaPengguna','$alamat','$idTarif')";
-  $data = mysqli_query($conn, $queryUser);
+  registerUser($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
   header("Location: ./sampleLogin.php");
 
   return;
