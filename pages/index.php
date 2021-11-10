@@ -2,14 +2,14 @@
 
 require '../config/conn.php';
 
-if(!isset($_COOKIE['login'])) {
-  header("Location: ./auth/login.php");
-
+if(!isset($_COOKIE['isAdmin'])) {
+  header("Location: ./auth/sampleLogin.php");
   return;
 }
 
 if(isset($_POST['logout'])) {
-  setcookie('login', null, -1, '/');
+  setcookie('isAdmin', null, -1, '/');
+  setcookie('username', null, -1, '/');
   echo "
     <script>
       window.location.reload()

@@ -1,7 +1,7 @@
 <?php
 
 require '../../config/conn.php';
-require '../../utils/registerAdmin.php';
+require '../../utils/register.php';
 
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
   $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
   $idTarif = mysqli_real_escape_string($conn,  $_POST['tarif']);
 
-  if($username === "" && $password === "" || $konfimasiPassword === "" || $nomorKwh === "" || $namaPengguna === "" || $alamat === "") {
+  if($username === "" || $password === "" || $konfimasiPassword === "" || $nomorKwh === "" || $namaPengguna === "" || $alamat === "") {
     echo "asdsd";
     return;
   }
@@ -32,14 +32,8 @@ if(isset($_POST['submit'])) {
     echo "asdsd";
     return;
   }
-  
-  if(registerAdmin($conn, $username, $password, $namaPengguna) === "true") {
-    header("Location: ./sampleLogin.php");
-    return;
-  }
 
-  registerUser($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
-  header("Location: ./sampleLogin.php");
+  findDuplicate($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
 
   return;
 }
@@ -133,7 +127,7 @@ if(isset($_POST['submit'])) {
           </div>
         </div>
         <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit">submit</button>
-        <a href="./login.php">
+        <a href="./sampleLogin.php">
           <p class="text-center text-sm text-blue-400 mt-3">saya sudah punya akun!</p>
         </a>
       </form>

@@ -1,7 +1,33 @@
 <?php
 
+function findDuplicate($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif) {
+  $stmtAdmin = $conn->prepare("SELECT * FROM admin WHERE username='$username'");
+  $stmtAdmin->execute();
+  $resultAdmin = $stmtAdmin->get_result();
+  $rowAdmin = $resultAdmin->fetch_assoc();
+
+  $stmtUser = $conn->prepare("SELECT * FROM pelanggan WHERE username='$username'");
+  $stmtUser->execute();
+  $resultUser = $stmtUser->get_result();
+  $rowUser = $resultUser->fetch_assoc();
+
+  if($rowUser['username'] || $rowAdmin['username']) {
+    echo "username sudah ada";
+    return;
+  }
+
+  if(registerAdmin($conn, $username, $password, $namaPengguna) === true) {
+    header("Location: ./sampleLogin.php");
+    return;
+  }
+
+  registerUser($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
+  header("Location: ./sampleLogin.php");
+
+  return;
+}
+
 function registerAdmin($conn, $username, $password, $namaPengguna) {
-  $isTrue = "true";
   $isAdminID = "";
   $row = mysqli_query($conn, "SELECT * FROM admin");
 
@@ -15,7 +41,7 @@ function registerAdmin($conn, $username, $password, $namaPengguna) {
     $stmt->bind_param("sssi", $username, $password, $namaPengguna, $level);
     $stmt->execute();
     
-    return $isTrue;
+    return true;
   }
   
   return;

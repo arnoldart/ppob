@@ -1,43 +1,38 @@
 <?php
 
 require '../../config/conn.php';
+require '../../utils/login.php';
 
-if(isset($_COOKIE['login'])) {
-  if($_COOKIE['login'] == 'true') {
-    header("Location: ../index.php");
+if(isset($_COOKIE['isAdmin'])) {
+  if($_COOKIE['isAdmin'] == true) {
+    header("Location: ../admin/");
+    return;
   }
+  header("Location: ../index.php");
 }
 
 if(isset($_POST['submit'])) {
-  $username = @$_POST['username'];
-  $password = @$_POST['password'];
+  $username = mysqli_real_escape_string($conn, $_POST['username']);
+  $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-  $queryAdmin = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
-  $UserAdmin = "";
-
-  while($row = mysqli_fetch_assoc($queryAdmin)) {
-    $UserAdmin = $row['username'];
+  if($username === "" || $password === "") {
+    echo "asdsd";
+    return;
   }
 
-  if($UserAdmin !== "") {
+  if(loginAdmin($conn, $username, $password) === true) {
     header("Location: ../admin/");
-
     return;
   }
 
-  $queryUser = "SELECT * FROM pelanggan WHERE username='$username' AND password=$password";
-  $data = mysqli_query($conn, $queryUser);
-
-  if(mysqli_num_rows($data) === 0) {
-    echo "lah";
-
+  if(loginUser($conn, $username, $password) === true) {
+    header("Location: ../index.php");
     return;
   }
 
-  setcookie('username', $username, time()+24*60*60, '/');
-  setcookie('login', 'true', time()+24*60*60, '/');
-
-  header("Location: ../index.php");
+  echo "username atau password salah";
+  setcookie('isAdmin', null, -1, '/');
+  header("Location: ./sampleLogin.php");
 
   return;
 }
@@ -72,7 +67,7 @@ if(isset($_POST['submit'])) {
           </div>
         </div>
         <button class="text-white py-1 rounded-2xl w-full background-gradient" type="submit" name="submit" id="submit" >submit</button>
-        <a href="./register.php">
+        <a href="./sampleRegister.php">
           <p class="text-center text-sm text-blue-400 mt-10">saya belum punya akun!</p>
         </a>
       </form>
