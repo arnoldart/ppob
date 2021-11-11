@@ -47,15 +47,20 @@ if(isset($_POST['logout'])) {
         <li class="mt-5 text-lg ml-5"><a href="./dataPelanggan.php">Data Pelanggan</a></li>
       </ul>
     </div>
-    <div class="bg-white h-screen" style="flex: 5;">
-      <div class="flex items-center justify-between bg-white filter drop-shadow px-5 py-3">
+    <div class="bg-white h-screen static" style="flex: 5;">
+      <div class="flex items-center justify-between bg-white px-5 py-3 shadow">
         <p class="text-xl font-bold">Home</p>
         <div>
-          <p onmouseover="userProfile()" class="text-md"><?= $getFirstUsernameAdmin, $getAll;?></p>
-          <p id="test">test</p>
+          <p onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="text-md cursor-pointer"><?= $getFirstUsernameAdmin, $getAll;?></p>
+          <div onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="hidden absolute p-7 right-0 bg-white shadow" id="profile">
+            <ul>
+              <li class="hover:text-gray-500 cursor-pointer">Profile</li>
+              <li class="mt-3 hover:text-red-500 cursor-pointer">Logout</li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="bg-white filter drop-shadow py-5">
+      <div class="bg-white w-full py-5 mt-5">
         <p class="ml-5 text-lg">Selamat datang di PPOB</p>
         <p class="ml-5 mt-3 text-lg">Selamat datang <?= $getFirstUsernameAdmin, $getAll; ?></p>
       </div>

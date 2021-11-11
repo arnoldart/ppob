@@ -39,6 +39,28 @@ if(isset($_POST['logout'])) {
 <body>
 
   <main class="flex">
+    <main id="adminModal" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
+      <div class="flex justify-center items-center h-screen">
+        <div class="bg-white p-5 w-1/2">
+            <div class="relative">
+              <p class="text-center text-2xl font-bold">Input Admin Baru</p>
+              <div onclick="modal(false)" class="absolute top-0 right-0">
+                <p>close</p>
+              </div>
+            </div>
+          <form action="">
+            <p>Username</p>
+            <input type="text" placeholder="Masukkan Username">
+          </form>
+        </div>
+      </div>
+      <!-- <div class="bg-white shadow">
+        <form action="">
+          <p>Username</p>
+          <input type="text" placeholder="Masukkan Username">
+        </form>
+      </div> -->
+    </main>
     <div class="bg-gray-800 h-screen text-white" style="flex: 1;">
       <p class="text-center text-2xl font-bold my-10">PPOB</p>
       <ul>
@@ -56,10 +78,10 @@ if(isset($_POST['logout'])) {
       </div>
       <div class="px-3 mt-20">
         <div class="flex justify-between items-center">
-          <div class="border border-black rounded-full px-2 py-2">
-            <input type="text" class="rounded-full" placeholder="Cari admin">
+          <div class="border border-gray-500 rounded-full px-1 py-2">
+            <input type="text" class="rounded-full px-1" placeholder="Cari admin">
           </div>
-          <button class="bg-blue-400 rounded-full px-3 py-2 text-white text-lg">Tambah Admin</button>
+          <button onclick="modal(true);" class="bg-blue-400 rounded-full px-3 py-2 text-white text-lg">Tambah Admin</button>
         </div>
         <div class="mt-7">
           <table class="border border-black">
@@ -86,12 +108,7 @@ if(isset($_POST['logout'])) {
     </div>
   </main>  
 
-  <!-- <div class="flex">
-    <p>Selamat Datang <?= $_COOKIE['username']?></p>
-    <form action="" method="POST">
-      <button type="submit" name="logout">Logout</button>
-    </form>
-  </div> -->
+  <script src="../../dom/modal/adminModal.dom.js"></script>
 
 </body>
 </html>
