@@ -41,16 +41,37 @@ if(isset($_POST['logout'])) {
   <main class="flex">
     <main id="adminModal" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
       <div class="flex justify-center items-center h-screen">
-        <div class="bg-white p-5 w-1/2">
+        <div class="bg-white py-8 px-8 rounded-md">
             <div class="relative">
               <p class="text-center text-2xl font-bold">Input Admin Baru</p>
               <div onclick="modal(false)" class="absolute top-0 right-0">
                 <p>close</p>
               </div>
             </div>
-          <form action="">
-            <p>Username</p>
-            <input type="text" placeholder="Masukkan Username">
+          <form action="" class="flex flex-col items-center justify-center">
+            <div class="flex mt-10">
+              <div>
+                <p>Username</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+              </div>
+              <div class="ml-8">
+                <p>Nama Admin</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+              </div>
+            </div>
+            <div class="flex mt-8">
+              <div>
+                <p>Password</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+              </div>
+              <div class="ml-8">
+                <p>Konfirmasi Password</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+              </div>
+            </div>
+            <div class="mt-10">
+              <button class="text-white py-2 px-10 rounded-full w-full bg-gray-700">Submit</button>
+            </div>
           </form>
         </div>
       </div>
@@ -106,7 +127,7 @@ if(isset($_POST['logout'])) {
         </div>
       </div>
     </div>
-  </main>  
+  </main>
 
   <script src="../../dom/modal/adminModal.dom.js"></script>
 
