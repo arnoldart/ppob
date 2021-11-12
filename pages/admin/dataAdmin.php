@@ -130,6 +130,14 @@ if(isset($_POST['logout'])) {
   </main>
 
   <script src="../../dom/modal/adminModal.dom.js"></script>
-
+  <script>
+    document.addEventListener("keydown", (event) => {
+      if(event.key === "Escape") {
+        modal(false);
+        return;
+      }
+    })
+  </script>
+  
 </body>
 </html>
