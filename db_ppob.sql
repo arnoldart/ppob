@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 01:48 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- Waktu pembuatan: 12 Nov 2021 pada 03.41
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -37,16 +37,16 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Dumping data untuk tabel `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_admin`, `id_level`) VALUES
-(1, 'hadeh', '123', 'testing admin', 1);
+(1, 'jedidtaAdmin', '123', 'adoni', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggan`
+-- Struktur dari tabel `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -56,26 +56,25 @@ CREATE TABLE `pelanggan` (
   `nomor_kwh` int(11) NOT NULL,
   `nama_pelanggan` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `id_tarif` int(11) NOT NULL
+  `id_tarif` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pelanggan`
+-- Dumping data untuk tabel `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES
-(1, 'jedidta', '1234', 12312, 'jedidta adoni saputra', 'mars', 1);
+(1, 'jedidta', '123', 123, 'jedidta adoni saputra', 'Gamping', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembayaran`
+-- Struktur dari tabel `pembayaran`
 --
 
 CREATE TABLE `pembayaran` (
   `id_pembayaran` int(11) NOT NULL,
   `id_tagihan` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
   `tanggal_pembayaran` date NOT NULL,
   `bulan_bayar` varchar(255) NOT NULL,
   `biaya_admin` int(11) NOT NULL,
@@ -86,7 +85,7 @@ CREATE TABLE `pembayaran` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penggunaan`
+-- Struktur dari tabel `penggunaan`
 --
 
 CREATE TABLE `penggunaan` (
@@ -101,13 +100,12 @@ CREATE TABLE `penggunaan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tagihan`
+-- Struktur dari tabel `tagihan`
 --
 
 CREATE TABLE `tagihan` (
   `id_tagihan` int(11) NOT NULL,
   `id_penggunaan` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
   `bulan` varchar(255) NOT NULL,
   `tahun` varchar(255) NOT NULL,
   `jumlah_meter` int(11) NOT NULL,
@@ -117,7 +115,7 @@ CREATE TABLE `tagihan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tarif`
+-- Struktur dari tabel `tarif`
 --
 
 CREATE TABLE `tarif` (
@@ -127,16 +125,17 @@ CREATE TABLE `tarif` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tarif`
+-- Dumping data untuk tabel `tarif`
 --
 
 INSERT INTO `tarif` (`id_tarif`, `daya`, `tarifperkwh`) VALUES
-(1, 10000, 10000);
+(1, 450, 10000),
+(2, 900, 10000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userlevel`
+-- Struktur dari tabel `userlevel`
 --
 
 CREATE TABLE `userlevel` (
@@ -145,7 +144,7 @@ CREATE TABLE `userlevel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `userlevel`
+-- Dumping data untuk tabel `userlevel`
 --
 
 INSERT INTO `userlevel` (`id_level`, `nama_level`) VALUES
@@ -158,137 +157,133 @@ INSERT INTO `userlevel` (`id_level`, `nama_level`) VALUES
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`),
   ADD KEY `id_level` (`id_level`);
 
 --
--- Indexes for table `pelanggan`
+-- Indeks untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`),
   ADD KEY `id_tarif` (`id_tarif`);
 
 --
--- Indexes for table `pembayaran`
+-- Indeks untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
-  ADD KEY `id_tagihan` (`id_tagihan`,`id_pelanggan`),
-  ADD KEY `id_admin` (`id_admin`),
-  ADD KEY `id_pelanggan` (`id_pelanggan`);
+  ADD KEY `id_tagihan` (`id_tagihan`),
+  ADD KEY `id_admin` (`id_admin`);
 
 --
--- Indexes for table `penggunaan`
+-- Indeks untuk tabel `penggunaan`
 --
 ALTER TABLE `penggunaan`
   ADD PRIMARY KEY (`id_penggunaan`),
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indexes for table `tagihan`
+-- Indeks untuk tabel `tagihan`
 --
 ALTER TABLE `tagihan`
   ADD PRIMARY KEY (`id_tagihan`),
-  ADD KEY `id_penggunaan` (`id_penggunaan`,`id_pelanggan`),
-  ADD KEY `id_pelanggan` (`id_pelanggan`);
+  ADD KEY `id_penggunaan` (`id_penggunaan`);
 
 --
--- Indexes for table `tarif`
+-- Indeks untuk tabel `tarif`
 --
 ALTER TABLE `tarif`
   ADD PRIMARY KEY (`id_tarif`);
 
 --
--- Indexes for table `userlevel`
+-- Indeks untuk tabel `userlevel`
 --
 ALTER TABLE `userlevel`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pelanggan`
+-- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pembayaran`
+-- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
   MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `penggunaan`
+-- AUTO_INCREMENT untuk tabel `penggunaan`
 --
 ALTER TABLE `penggunaan`
   MODIFY `id_penggunaan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tagihan`
+-- AUTO_INCREMENT untuk tabel `tagihan`
 --
 ALTER TABLE `tagihan`
   MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tarif`
+-- AUTO_INCREMENT untuk tabel `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `userlevel`
+-- AUTO_INCREMENT untuk tabel `userlevel`
 --
 ALTER TABLE `userlevel`
   MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `admin`
+-- Ketidakleluasaan untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `userlevel` (`id_level`);
 
 --
--- Constraints for table `pelanggan`
+-- Ketidakleluasaan untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD CONSTRAINT `pelanggan_ibfk_1` FOREIGN KEY (`id_tarif`) REFERENCES `tarif` (`id_tarif`);
 
 --
--- Constraints for table `pembayaran`
+-- Ketidakleluasaan untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`),
   ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`),
   ADD CONSTRAINT `pembayaran_ibfk_3` FOREIGN KEY (`id_tagihan`) REFERENCES `tagihan` (`id_tagihan`);
 
 --
--- Constraints for table `penggunaan`
+-- Ketidakleluasaan untuk tabel `penggunaan`
 --
 ALTER TABLE `penggunaan`
   ADD CONSTRAINT `penggunaan_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
 
 --
--- Constraints for table `tagihan`
+-- Ketidakleluasaan untuk tabel `tagihan`
 --
 ALTER TABLE `tagihan`
-  ADD CONSTRAINT `tagihan_ibfk_2` FOREIGN KEY (`id_penggunaan`) REFERENCES `penggunaan` (`id_penggunaan`),
-  ADD CONSTRAINT `tagihan_ibfk_4` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
+  ADD CONSTRAINT `tagihan_ibfk_2` FOREIGN KEY (`id_penggunaan`) REFERENCES `penggunaan` (`id_penggunaan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
