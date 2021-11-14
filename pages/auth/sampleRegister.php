@@ -16,8 +16,7 @@ if(isset($_COOKIE['login'])) {
 if(isset($_POST['submit'])) {
   $username = mysqli_real_escape_string($conn, $_POST['username']);
   $password = mysqli_real_escape_string($conn, $_POST['password']);
-  $konfimasiPassword = mysqli_real_escape_string($conn, 
-  $_POST['konfirmasiPassword']);
+  $konfimasiPassword = mysqli_real_escape_string($conn, $_POST['konfirmasiPassword']);
   $nomorKwh = mysqli_real_escape_string($conn, $_POST['nomorKwh']);
   $namaPengguna = mysqli_real_escape_string($conn, $_POST['namaPengguna']);
   $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
@@ -33,7 +32,7 @@ if(isset($_POST['submit'])) {
     return;
   }
 
-  findDuplicate($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
+  register($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif, $rootPath);
 
   return;
 }

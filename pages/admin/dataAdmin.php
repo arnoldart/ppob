@@ -1,6 +1,9 @@
 <?php
 
 require '../../config/conn.php';
+require '../../utils/register.php';
+
+$rootPath = $_SERVER['SCRIPT_FILENAME'];
 
 $queryAdmin = mysqli_query($conn, "SELECT * FROM admin");
 
@@ -13,7 +16,6 @@ if(!isset($_COOKIE['isAdmin'])) {
   return;
 }
 
-
 if(isset($_POST['logout'])) {
   setcookie('isAdmin', null, -1, '/');
   setcookie('username', null, -1, '/');
@@ -22,6 +24,35 @@ if(isset($_POST['logout'])) {
       window.location.reload()
     </script>
   ";
+  return;
+}
+
+if(isset($_POST['submitCreateAdmin'])) {
+  $username = mysqli_real_escape_string($conn, $_POST['username']);
+  $namaPengguna = mysqli_real_escape_string($conn, $_POST['namaAdmin']);
+  $password = mysqli_real_escape_string($conn, $_POST['password']);
+  $konfirmasiPassword = mysqli_real_escape_string($conn, $_POST['konfirmasiPassword']);
+
+  $nomorKwh = "123";
+  $alamat = "123";
+  $idTarif = "2";
+
+  if($password !== $konfirmasiPassword) {
+    echo "menghadeh";
+
+    return;
+  }
+
+  $adminData = array(
+    'conn' => $conn,
+    'path' => $rootPath, 
+    'username' => $username,
+    'namaPengguna' => $namaPengguna,
+    'password' => $password
+  );
+
+  register($adminData);
+
   return;
 }
 
@@ -45,42 +76,36 @@ if(isset($_POST['logout'])) {
             <div class="relative">
               <p class="text-center text-2xl font-bold">Input Admin Baru</p>
               <div onclick="modal(false)" class="absolute top-0 right-0">
-                <p>close</p>
+                <p class="cursor-pointer">close</p>
               </div>
             </div>
-          <form action="" class="flex flex-col items-center justify-center">
+          <form action="" class="flex flex-col items-center justify-center" method="POST">
             <div class="flex mt-10">
               <div>
                 <p>Username</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+                <input type="text" class="border border-gray-500 rounded pl-1" name="username" id="username" placeholder="Masukkan Username">
               </div>
               <div class="ml-8">
                 <p>Nama Admin</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+                <input type="text" class="border border-gray-500 rounded pl-1" name="namaAdmin" id="namaAdmin" placeholder="Masukkan Nama Admin">
               </div>
             </div>
             <div class="flex mt-8">
               <div>
                 <p>Password</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+                <input type="text" class="border border-gray-500 rounded pl-1" name="password" id="password" placeholder="Masukkan Password">
               </div>
               <div class="ml-8">
                 <p>Konfirmasi Password</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" placeholder="Masukkan Username">
+                <input type="text" class="border border-gray-500 rounded pl-1" name="konfirmasiPassword" id="konfirmasiPassword" placeholder="Masukkan Ulang Password">
               </div>
             </div>
             <div class="mt-10">
-              <button class="text-white py-2 px-10 rounded-full w-full bg-gray-700">Submit</button>
+              <button class="text-white py-2 px-10 rounded-full w-full bg-gray-700" type="submit" name="submitCreateAdmin">Submit</button>
             </div>
           </form>
         </div>
       </div>
-      <!-- <div class="bg-white shadow">
-        <form action="">
-          <p>Username</p>
-          <input type="text" placeholder="Masukkan Username">
-        </form>
-      </div> -->
     </main>
     <div class="bg-gray-800 h-screen text-white" style="flex: 1;">
       <p class="text-center text-2xl font-bold my-10">PPOB</p>
