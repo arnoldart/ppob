@@ -16,15 +16,10 @@ function register($value) {
     return;
   }
 
-  if(registerAdmin($value) === true ) {
-    echo 'admin berhasil';
+  if(registerAdmin($value)) {
+    
     return;
   }
-
-  // if(registerAdmin($value) === true) {
-  //   // header("Location: ./sampleLogin.php");
-  //   return;
-  // }
 
   registerUser($value);
   // header("Location: ./sampleLogin.php");
@@ -34,14 +29,14 @@ function register($value) {
 function registerAdmin($value) {
   $validatePath = explode('/', $value['path']);
   $getEndPath = end($validatePath);
-  
+
   if($getEndPath === 'dataAdmin.php') {
     $level = 2;
     $stmt = $value['conn']->prepare("INSERT INTO `admin` (`username`, `password`, `nama_admin`, `id_level`) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("sssi", $value['username'], $value['password'], $value['namaPengguna'], $level);
     $stmt->execute();
 
-    // header('Location: ../admin/dataAdmin.php');
+    header('Location: ../admin/dataAdmin.php');
 
     return true;
   }
@@ -59,7 +54,7 @@ function registerAdmin($value) {
     $stmt->bind_param("sssi", $value['username'], $value['password'], $value['namaPengguna'], $level);
     $stmt->execute();
 
-    // header('Location: ./sampleLogin.php');
+    header('Location: ./sampleLogin.php');
     
     return true;
   }
@@ -67,12 +62,25 @@ function registerAdmin($value) {
   return;
 }
 
-// $conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif
-
 function registerUser($value) {
-  $stmt = $conn->prepare("INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES (?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("sssssi", $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif);
+  $validatePath = explode('/', $value['path']);
+  $getEndPath = end($validatePath);
+
+  if($getEndPath === "dataPelanggan.php") {
+    $stmt = $value['conn']->prepare("INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssi", $value['username'], $value['password'], $value['nomorKwh'], $value['namaPengguna'], $value['alamat'], $value['idTarif']);
+    $stmt->execute();
+
+    // header("Location: ./sampleLogin.php");
+    
+    return;
+  }
+
+  $stmt = $value['conn']->prepare("INSERT INTO `pelanggan` (`username`, `password`, `nomor_kwh`, `nama_pelanggan`, `alamat`, `id_tarif`) VALUES (?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssssi", $value['username'], $value['password'], $value['nomorKwh'], $value['namaPengguna'], $value['alamat'], $value['idTarif']);
   $stmt->execute();
+
+  header("Location: ./sampleLogin.php");
 
   return;
 }

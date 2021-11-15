@@ -55,7 +55,7 @@ if(isset($_POST['logout'])) {
           <div onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="hidden absolute p-7 right-0 bg-white shadow" id="profile">
             <ul>
               <li class="hover:text-gray-500 cursor-pointer">Profile</li>
-              <li class="mt-3 hover:text-red-500 cursor-pointer">Logout</li>
+              <li class="mt-3 hover:text-red-500 cursor-pointer"><form action="" method="POST"><button type="submit" name="logout">Logout</button></form></li>
             </ul>
           </div>
         </div>
@@ -68,6 +68,7 @@ if(isset($_POST['logout'])) {
   </main>
 
   <script src="../../dom/profile.dom.js"></script>
+  <script src="../../utils/logout.js"></script>
 
 </body>
 </html>

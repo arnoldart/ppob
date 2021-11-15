@@ -3,9 +3,9 @@
 require '../../config/conn.php';
 require '../../utils/register.php';
 
+$rootPath = $_SERVER['SCRIPT_FILENAME'];
+
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
-
-
 
 if(isset($_COOKIE['login'])) {
   if($_COOKIE['login'] == 'true') {
@@ -32,7 +32,18 @@ if(isset($_POST['submit'])) {
     return;
   }
 
-  register($conn, $username, $password, $nomorKwh, $namaPengguna, $alamat, $idTarif, $rootPath);
+  $inputData = [
+    'conn' => $conn,
+    'username' => $username,
+    'password' => $password,
+    'nomorKwh' => $nomorKwh,
+    'namaPengguna' => $namaPengguna,
+    'alamat' => $alamat,
+    'idTarif' => $idTarif,
+    'path' => $rootPath,
+  ];
+
+  register($inputData);
 
   return;
 }
