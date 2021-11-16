@@ -2,6 +2,7 @@
 
 require '../../config/conn.php';
 require '../../utils/register.php';
+require '../../utils/hapus.php';
 
 $rootPath = $_SERVER['SCRIPT_FILENAME'];
 
@@ -53,6 +54,18 @@ if(isset($_POST['submitCreateAdmin'])) {
 
   register($adminData);
 
+  return;
+}
+
+if(isset($_POST['hapus'])) {
+  $val = [
+    "conn" => $conn,
+    "path" => $rootPath,
+    "id" => $_POST['id']
+  ];
+
+  hapus($val);
+  
   return;
 }
 
@@ -149,8 +162,12 @@ if(isset($_POST['submitCreateAdmin'])) {
                 <tr>
                   <td class="border border-black w-screen p-2"><?= $row['username']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['nama_admin']; ?></td>
-                  <td class="border border-black w-screen p-2">Edit</td>
-                  <td class="border border-black w-screen p-2">Hapus</td>
+                  <td class="border border-black w-screen p-2">Detail</td>
+                  <td class="border border-black w-screen p-2">
+                    <form action="" method="post">
+                      <button type="submit" name="hapus"><input type="hidden" value=<?= $row['id_admin'];?> name="id">Hapus</button>
+                    </form>
+                  </td>
                 </tr>
               <?php }?>
             </tbody>

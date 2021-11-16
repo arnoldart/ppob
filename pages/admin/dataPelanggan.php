@@ -2,6 +2,9 @@
 
 require '../../config/conn.php';
 require '../../utils/register.php';
+require '../../utils/hapus.php';
+
+$rootPath = $_SERVER['SCRIPT_FILENAME'];
 
 $queryAdmin = mysqli_query($conn, "SELECT * FROM pelanggan");
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
@@ -30,9 +33,9 @@ if(isset($_POST['logout'])) {
 if(isset($_POST['submitCreateUser'])) {
   $username = mysqli_real_escape_string($conn, $_POST['username']);
   $password = mysqli_real_escape_string($conn, $_POST['password']);
-  $konfimasiPassword = mysqli_real_escape_string($conn, $_POST['konfirmasiPassword']);
+  $konfirmasiPassword = mysqli_real_escape_string($conn, $_POST['konfirmasiPassword']);
   $nomorKwh = mysqli_real_escape_string($conn, $_POST['nomorKwh']);
-  $namaPengguna = mysqli_real_escape_string($conn, $_POST['namaPengguna']);
+  $namaPengguna = mysqli_real_escape_string($conn, $_POST['namaAdmin']);
   $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
   $idTarif = mysqli_real_escape_string($conn,  $_POST['tarif']);
 
@@ -56,6 +59,19 @@ if(isset($_POST['submitCreateUser'])) {
 
   register($userData);
 
+  return;
+}
+
+if(isset($_POST['hapus'])) {
+
+  $val = [
+    'conn' => $conn,
+    'id' => $_POST['id'],
+    'path' => $rootPath
+  ];
+
+  hapus($val);
+  
   return;
 }
 
@@ -184,8 +200,12 @@ if(isset($_POST['submitCreateUser'])) {
                   <td class="border border-black w-screen p-2"><?= $row['nama_pelanggan']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['alamat']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['nomor_kwh']; ?></td>
-                  <td class="border border-black w-screen p-2">Edit</td>
-                  <td class="border border-black w-screen p-2">Hapus</td>
+                  <td class="border border-black w-screen p-2 cursor-pointer" >Detail</td>
+                  <td class="border border-black w-screen p-2">
+                    <form action="" method="POST">
+                      <button type="submit" name="hapus"><input value=<?= $row['id_pelanggan'];?> type="hidden" name="id">Hapus</button>
+                    </form>
+                  </td>
                 </tr>
               <?php }?>
             </tbody>

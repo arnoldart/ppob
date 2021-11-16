@@ -22,7 +22,7 @@ function register($value) {
   }
 
   registerUser($value);
-  // header("Location: ./sampleLogin.php");
+  
   return;
 }
 
@@ -71,8 +71,8 @@ function registerUser($value) {
     $stmt->bind_param("sssssi", $value['username'], $value['password'], $value['nomorKwh'], $value['namaPengguna'], $value['alamat'], $value['idTarif']);
     $stmt->execute();
 
-    // header("Location: ./sampleLogin.php");
-    
+    header("Location: ../admin/dataPelanggan.php");
+
     return;
   }
 
