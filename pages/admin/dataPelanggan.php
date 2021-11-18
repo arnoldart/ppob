@@ -200,7 +200,9 @@ if(isset($_POST['hapus'])) {
                   <td class="border border-black w-screen p-2"><?= $row['nama_pelanggan']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['alamat']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['nomor_kwh']; ?></td>
-                  <td class="border border-black w-screen p-2 cursor-pointer" >Detail</td>
+                  <td class="border border-black w-screen p-2" >
+                    <a href="./detail/slug.php?id=1">Detail</a>
+                  </td>
                   <td class="border border-black w-screen p-2">
                     <form action="" method="POST">
                       <button type="submit" name="hapus"><input value=<?= $row['id_pelanggan'];?> type="hidden" name="id">Hapus</button>
