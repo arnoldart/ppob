@@ -94,8 +94,8 @@ if(isset($_POST['hapus'])) {
         <div class="bg-white py-8 px-8 rounded-md">
             <div class="relative">
               <p class="text-center text-2xl font-bold">Input Admin Baru</p>
-              <div onclick="modal(false)" class="absolute top-0 right-0">
-                <p class="cursor-pointer">close</p>
+              <div onclick="modal(false)" class="absolute -top-3 right-0">
+                <img class="cursor-pointer" src="../../icon/lightClose.svg" alt="close">
               </div>
             </div>
           <form action="" class="flex flex-col items-center justify-center" method="POST">
