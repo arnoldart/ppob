@@ -85,11 +85,13 @@ if(isset($_POST['hapus'])) {
   <main class="flex">
     <main id="adminModal" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
       <div class="flex justify-center items-center h-screen">
-        <div class="bg-white py-8 px-8 rounded-md">
-            <div class="relative">
+        <div class="bg-white py-8 px-8 rounded-md relative">
+            <div class="">
               <p class="text-center text-2xl font-bold">Input Admin Baru</p>
-              <div onclick="modal(false)" class="absolute top-0 right-0">
-                <p class="cursor-pointer">close</p>
+              <div onclick="modal(false)" class="absolute top-2 right-2">
+                <div class="w-7">
+                  <img class="cursor-pointer" src="../../icon/lightClose.svg" alt="close">
+                </div>
               </div>
             </div>
           <form action="" class="flex flex-col items-center justify-center" method="POST">
@@ -130,7 +132,7 @@ if(isset($_POST['hapus'])) {
     </div>
     <div class="bg-white h-screen" style="flex: 5;">
       <div class="flex items-center justify-between bg-white filter drop-shadow px-5 py-3">
-        <p class="text-xl font-bold">Home</p>
+        <p class="text-xl font-bold">Data Admin</p>
         <div>
           <p onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="text-md cursor-pointer"><?= $getFirstUsernameAdmin, $getAll;?></p>
           <div onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="hidden absolute p-7 right-0 bg-white shadow" id="profile">
