@@ -144,6 +144,13 @@ if(isset($_POST['hapus'])) {
         </div>
       </div>
       <div class="px-3 mt-20">
+        <!-- <div class="inline-block">
+          <div class="flex">
+            <div class="p-10 bg-gray-500"></div>
+            <div class="p-10 bg-gray-500"></div>
+            <div class="p-10 bg-gray-500"></div>
+          </div>
+        </div> -->
         <div class="flex justify-between items-center">
           <div class="border border-gray-500 rounded-full px-1 py-2">
             <input type="text" class="rounded-full px-1" placeholder="Cari admin">
