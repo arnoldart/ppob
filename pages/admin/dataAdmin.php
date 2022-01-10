@@ -171,7 +171,9 @@ if(isset($_POST['hapus'])) {
                 <tr>
                   <td class="border border-black w-screen p-2"><?= $row['username']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['nama_admin']; ?></td>
-                  <td class="border border-black w-screen p-2">Detail</td>
+                  <td class="border border-black w-screen p-2">
+                    <a href="#">Detail</a>
+                  </td>
                   <td class="border border-black w-screen p-2">
                     <form action="" method="post">
                       <button type="submit" name="hapus"><input type="hidden" value=<?= $row['id_admin'];?> name="id">Hapus</button>
