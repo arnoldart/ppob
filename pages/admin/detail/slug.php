@@ -95,14 +95,15 @@ $getAll = substr($_COOKIE['username'], 1);
         </div>
       </div>
     </main>
-    <div class="bg-gray-800 h-screen text-white" style="flex: 1;">
+    <nav class="bg-gray-800 h-screen text-white" style="flex: 1;">
       <p class="text-center text-2xl font-bold my-10">PPOB</p>
       <ul>
         <li class="mt-5 text-lg ml-5"><a href="../index.php">Home</a></li>
+        <li class="mt-5 text-lg ml-5">Data</li>
         <li class="mt-5 text-lg ml-5"><a href="../dataAdmin.php">Data Admin</a></li>
         <li class="mt-5 text-lg ml-5"><a href="../dataPelanggan.php">Data Pelanggan</a></li>
       </ul>
-    </div>
+    </nav>
     <div class="bg-white h-screen static" style="flex: 5;">
       <div class="flex items-center justify-between bg-white px-5 py-3 shadow">
         <p class="text-xl font-bold">Detail</p>

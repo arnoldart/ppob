@@ -69,6 +69,18 @@ if(isset($_POST['hapus'])) {
   return;
 }
 
+if(isset($_POST['detail'])) {
+  $val = [
+    "conn" => $conn,
+    "path" => $rootPath,
+    "id" => $_POST['id']
+  ];
+
+  detail($val);
+  
+  return;
+}
+
 ?>
 
 <html lang="en">
@@ -83,6 +95,8 @@ if(isset($_POST['hapus'])) {
 <body>
 
   <main class="flex">
+
+    <!-- NEW DATA -->
     <main id="adminModal" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
       <div class="flex justify-center items-center h-screen">
         <div class="bg-white py-8 px-8 rounded-md relative">
@@ -122,12 +136,59 @@ if(isset($_POST['hapus'])) {
         </div>
       </div>
     </main>
+
+    <!-- DETAIL -->
+    <main id="ModalDetail" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
+      <div class="flex justify-center items-center h-screen">
+        <div class="bg-white py-8 px-8 rounded-md relative">
+            <div class="">
+              <p class="text-center text-2xl font-bold">Input Admin Baru</p>
+              <div onclick="modalDetail(false)" class="absolute top-2 right-2">
+                <div class="w-7">
+                  <img class="cursor-pointer" src="../../icon/lightClose.svg" alt="close">
+                </div>
+              </div>
+            </div>
+          <form action="" class="flex flex-col items-center justify-center" method="POST">
+            <div class="flex mt-10">
+              <div>
+                <p>Username</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" name="username" id="username" placeholder="Masukkan Username">
+              </div>
+              <div class="ml-8">
+                <p>Nama Admin</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" name="namaAdmin" id="namaAdmin" placeholder="Masukkan Nama Admin">
+              </div>
+            </div>
+            <div class="flex mt-8">
+              <div>
+                <p>Password</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" name="password" id="password" placeholder="Masukkan Password">
+              </div>
+              <div class="ml-8">
+                <p>Konfirmasi Password</p>
+                <input type="text" class="border border-gray-500 rounded pl-1" name="konfirmasiPassword" id="konfirmasiPassword" placeholder="Masukkan Ulang Password">
+              </div>
+            </div>
+            <div class="mt-10">
+              <button class="text-white py-2 px-10 rounded-full w-full bg-gray-700" type="submit" name="submitCreateAdmin">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
     <div class="bg-gray-800 h-screen text-white" style="flex: 1;">
       <p class="text-center text-2xl font-bold my-10">PPOB</p>
       <ul>
         <li class="mt-5 text-lg ml-5"><a href="./index.php">Home</a></li>
-        <li class="mt-5 text-lg ml-5"><a href="./dataAdmin.php">Data Admin</a></li>
-        <li class="mt-5 text-lg ml-5"><a href="./dataPelanggan.php">Data Pelanggan</a></li>
+        <div>
+          <p class="mt-5 text-lg ml-5 cursor-pointer" onclick="clickHandler()">Data</p>
+          <div class="block transition-all">
+            <li class="mt-5 text-lg ml-5"><a href="./dataAdmin.php">Data Admin</a></li>
+            <li class="mt-5 text-lg ml-5"><a href="./dataPelanggan.php">Data Pelanggan</a></li>
+          </div>
+        </div>
       </ul>
     </div>
     <div class="bg-white h-screen" style="flex: 5;">
@@ -144,13 +205,6 @@ if(isset($_POST['hapus'])) {
         </div>
       </div>
       <div class="px-3 mt-20">
-        <!-- <div class="inline-block">
-          <div class="flex">
-            <div class="p-10 bg-gray-500"></div>
-            <div class="p-10 bg-gray-500"></div>
-            <div class="p-10 bg-gray-500"></div>
-          </div>
-        </div> -->
         <div class="flex justify-between items-center">
           <div class="border border-gray-500 rounded-full px-1 py-2">
             <input type="text" class="rounded-full px-1" placeholder="Cari admin">
@@ -171,8 +225,10 @@ if(isset($_POST['hapus'])) {
                 <tr>
                   <td class="border border-black w-screen p-2"><?= $row['username']; ?></td>
                   <td class="border border-black w-screen p-2"><?= $row['nama_admin']; ?></td>
-                  <td class="border border-black w-screen p-2">
-                    <a href="#">Detail</a>
+                  <td class="border border-black w-screen p-2 curso-pointer" onclick="modalDetail(true)">
+                    <form action="" method="POST">
+                      <button type="submit" name="detail"><input type="hidden" value=<?= $row['id_admin'];?> name="id">Detail</button>
+                    </form>
                   </td>
                   <td class="border border-black w-screen p-2">
                     <form action="" method="post">
@@ -187,9 +243,11 @@ if(isset($_POST['hapus'])) {
       </div>
     </div>
   </main>
-
+  
   <script src="../../dom/modal/adminModal.dom.js"></script>
   <script src="../../dom/profile.dom.js"></script>
+  <script src="../../hooks/useState.js"></script>
+  <script src="../../dom/modal/detailModal.dom.js"></script>
   <script>
     document.addEventListener("keydown", (event) => {
       if(event.key === "Escape") {
