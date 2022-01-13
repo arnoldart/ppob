@@ -156,27 +156,11 @@ if(isset($_POST['hapus'])) {
         </div>
       </div>
     </main>
-    <div class="bg-gray-800 h-screen text-white" style="flex: 1;">
-      <p class="text-center text-2xl font-bold my-10">PPOB</p>
-      <ul>
-        <li class="mt-5 text-lg ml-5"><a href="./index.php">Home</a></li>
-        <li class="mt-5 text-lg ml-5"><a href="./dataAdmin.php">Data Admin</a></li>
-        <li class="mt-5 text-lg ml-5"><a href="./dataPelanggan.php">Data Pelanggan</a></li>
-      </ul>
-    </div>
+    
+    <?php include_once '../../Components/SidebarNav.php'; ?>
+
     <div class="bg-white h-screen" style="flex: 5;">
-      <div class="flex items-center justify-between bg-white filter drop-shadow px-5 py-3">
-        <p class="text-xl font-bold">Data Pelanggan</p>
-        <div>
-          <p onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="text-md cursor-pointer"><?= $getFirstUsernameAdmin, $getAll;?></p>
-          <div onmouseover="userProfile(true)" onmouseout="userProfile(false)" class="hidden absolute p-7 right-0 bg-white shadow" id="profile">
-            <ul>
-              <li class="hover:text-gray-500 cursor-pointer">Profile</li>
-              <li class="mt-3 hover:text-red-500 cursor-pointer"><form action="" method="POST"><button type="submit" name="logout">Logout</button></form></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <?php include_once '../../Components/TopbarNav.php';?>
       <div class="px-3 mt-20">
         <div class="flex justify-between items-center">
           <div class="border border-gray-500 rounded-full px-1 py-2">
