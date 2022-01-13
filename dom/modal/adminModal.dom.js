@@ -1,13 +1,13 @@
-const adminModal = document.getElementById('adminModal')
+const modalNewQuery = document.getElementById('modalNewQuery')
 
 function modal(bool) {
   if(!bool) {
-    adminModal.style.display = "none"
+    modalNewQuery.style.display = "none"
 
     return;
   }
 
-  adminModal.style.display = "block"
+  modalNewQuery.style.display = "block"
 
   return;
 }
