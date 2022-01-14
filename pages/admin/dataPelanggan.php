@@ -89,11 +89,14 @@ if(isset($_POST['hapus'])) {
 <body>
 
   <main class="flex">
-    <?php include '../../Components/New.php';?>
+    <!-- MODAL NEW DATA -->
+    <?php include '../../Components/modal/ModalNewData.php';?>
     
+    <!-- MODAL SIDEBAR -->
     <?php include '../../Components/SidebarNav.php'; ?>
-
+    
     <div class="bg-white h-screen" style="flex: 5;">
+      <!-- MODAL TOPBAR -->
       <?php include_once '../../Components/TopbarNav.php';?>
       <div class="px-3 mt-20">
         <div class="flex justify-between items-center">
@@ -122,7 +125,7 @@ if(isset($_POST['hapus'])) {
                   <td class="border border-black w-screen p-2"><?= $row['nomor_kwh']; ?></td>
                   <td class="border border-black w-screen p-2" >
                     <a href="./detail/slug.php?id=1">Detail</a>
-                  </td>
+                  </td> 
                   <td class="border border-black w-screen p-2">
                     <form action="" method="POST">
                       <button type="submit" name="hapus"><input value=<?= $row['id_pelanggan'];?> type="hidden" name="id">Hapus</button>

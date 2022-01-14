@@ -41,7 +41,11 @@ if(isset($_POST['submitCreateAdmin'])) {
   <div class="flex justify-center items-center h-screen">
     <div class="bg-white py-8 px-8 rounded-md relative">
       <div>
-        <p class="text-center text-2xl font-bold"><?php $modalTitle?></p>
+        <?php if($getEndPath === "dataAdmin.php") { ?>
+          <p class="text-center text-2xl font-bold">Input Data Admin</p>
+        <?php } else { ?>
+          <p class="text-center text-2xl font-bold">Input Data Pelanggan</p>
+        <?php }?>
         <div onclick="modal(false)" class="absolute top-2 right-2">
           <div class="w-7">
             <img class="cursor-pointer" src="../../icon/lightClose.svg" alt="close">

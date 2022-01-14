@@ -41,17 +41,7 @@ if(isset($_POST['hapus'])) {
   return;
 }
 
-if(isset($_POST['detail'])) {
-  $val = [
-    "conn" => $conn,
-    "path" => $rootPath,
-    "id" => $_POST['id']
-  ];
-
-  detail($val);
-  
-  return;
-}
+$test = "megnhadeh";
 
 ?>
 
@@ -67,54 +57,17 @@ if(isset($_POST['detail'])) {
 <body>
 
   <main class="flex">
-
     <!-- NEW DATA -->
-    <?php include_once '../../Components/New.php'?>
+    <?php include_once '../../Components/modal/ModalNewData.php'?>
 
     <!-- DETAIL -->
-    <main id="ModalDetail" class="absolute hidden bg-black bg-opacity-50 h-screen w-screen z-10">
-      <div class="flex justify-center items-center h-screen">
-        <div class="bg-white py-8 px-8 rounded-md relative">
-            <div class="">
-              <p class="text-center text-2xl font-bold">Input Admin Baru</p>
-              <div onclick="modalDetail(false)" class="absolute top-2 right-2">
-                <div class="w-7">
-                  <img class="cursor-pointer" src="../../icon/lightClose.svg" alt="close">
-                </div>
-              </div>
-            </div>
-          <form action="" class="flex flex-col items-center justify-center" method="POST">
-            <div class="flex mt-10">
-              <div>
-                <p>Username</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" name="username" id="username" placeholder="Masukkan Username">
-              </div>
-              <div class="ml-8">
-                <p>Nama Admin</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" name="namaAdmin" id="namaAdmin" placeholder="Masukkan Nama Admin">
-              </div>
-            </div>
-            <div class="flex mt-8">
-              <div>
-                <p>Password</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" name="password" id="password" placeholder="Masukkan Password">
-              </div>
-              <div class="ml-8">
-                <p>Konfirmasi Password</p>
-                <input type="text" class="border border-gray-500 rounded pl-1" name="konfirmasiPassword" id="konfirmasiPassword" placeholder="Masukkan Ulang Password">
-              </div>
-            </div>
-            <div class="mt-10">
-              <button class="text-white py-2 px-10 rounded-full w-full bg-gray-700" type="submit" name="submitCreateAdmin">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </main>
+    <?php include_once '../../Components/modal/ModalDetail.php'?>
 
+    <!-- MODAL SIDEBAR -->
     <?php include_once '../../Components/SidebarNav.php'; ?>
 
     <div class="bg-white h-screen" style="flex: 5;">
+      <!-- MODAL TOPBAR -->
       <?php include_once '../../Components/TopbarNav.php'; ?>
       <div class="px-3 mt-20">
         <div class="flex justify-between items-center">
@@ -139,7 +92,7 @@ if(isset($_POST['detail'])) {
                   <td class="border border-black w-screen p-2"><?= $row['nama_admin']; ?></td>
                   <td class="border border-black w-screen p-2 curso-pointer">
                     <form action="" method="post">
-                      <button type="submit" name="detail"><input type="hidden" value=<?= $row['id_admin'];?> name="id">Detail</button>
+                      <button onclick="modalDetail(true)" type="submit" id="detail" name="detail"><input type="hidden" value=<?= $row['id_admin'];?> name="id">Detail</button>
                     </form>
                   </td>
                   <td class="border border-black w-screen p-2">
@@ -160,6 +113,7 @@ if(isset($_POST['detail'])) {
   <script src="../../dom/profile.dom.js"></script>
   <script src="../../hooks/useState.js"></script>
   <script src="../../dom/modal/detailModal.dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     document.addEventListener("keydown", (event) => {
       if(event.key === "Escape") {
@@ -168,6 +122,5 @@ if(isset($_POST['detail'])) {
       }
     })
   </script>
-  
 </body>
 </html>
