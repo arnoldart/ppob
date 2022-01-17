@@ -1,3 +1,10 @@
+<?php
+
+$getFirstUsernameAdmin = strtoupper(substr($_COOKIE['username'], 0, 1));
+$getAll = substr($_COOKIE['username'], 1);
+
+?>
+
 <div class="flex items-center justify-between bg-white filter drop-shadow px-5 py-3">
   <p class="text-xl font-bold">Data Pelanggan</p>
   <div>

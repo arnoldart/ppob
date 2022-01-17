@@ -9,9 +9,6 @@ $rootPath = $_SERVER['SCRIPT_FILENAME'];
 $queryAdmin = mysqli_query($conn, "SELECT * FROM pelanggan");
 $queryDaya = mysqli_query($conn, "SELECT * FROM tarif");
 
-$getFirstUsernameAdmin = strtoupper(substr($_COOKIE['username'], 0, 1));
-$getAll = substr($_COOKIE['username'], 1);
-
 if(!isset($_COOKIE['isAdmin'])) {
   header("Location: ../auth/sampleLogin.php");
 
