@@ -1,14 +1,20 @@
 <?php
 
+$val = [];
+
 if(isset($_POST['detail'])) {
-  $val = [
+  array_push($val, [
     "conn" => $conn,
     "path" => $rootPath,
     "id" => $_POST['id']
-  ];
+  ]); 
 
   return;
 }
+
+echo json_encode($val);
+
+
 
 ?>
 
@@ -51,3 +57,4 @@ if(isset($_POST['detail'])) {
     </div>
   </div>
 </main>
+

@@ -38,8 +38,6 @@ if(isset($_POST['hapus'])) {
   return;
 }
 
-$test = "megnhadeh";
-
 ?>
 
 <html lang="en">
@@ -118,6 +116,13 @@ $test = "megnhadeh";
         return;
       }
     })
+    
+    // let detail = document.getElementById("detail");
+    
+    // detail.addEventListener("click", () => {
+    //   console.log("<?= $val; ?>")
+    // })
+
   </script>
 </body>
 </html>
