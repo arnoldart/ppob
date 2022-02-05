@@ -1,9 +1,6 @@
 <?php
 
-$mysqli = new mysqli("db", "root", "root",  "db_ppob");
+echo "halo bang";
 
-if(!$mysqli) {
-  die("Connection failed : ".mysqli_connect_error());
-}
 
 ?>
