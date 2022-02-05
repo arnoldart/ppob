@@ -21,4 +21,4 @@ services:
     ports:
       - 3000:80
     volumes:
-      - ./src:/var/www/html
+      - ./:/var/www/html
